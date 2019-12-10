@@ -4,6 +4,7 @@ import com.typesafe.config.ConfigFactory
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import uk.gov.hmcts.reform.dmstore.actions.setup.LeaseServiceToken.leaseServiceToken
+import uk.gov.hmcts.reform.draftstore.actions.Upload
 
 import scala.concurrent.duration._
 
@@ -26,7 +27,7 @@ class ManageDocumentsAndCleanUp extends Simulation {
       .exec(leaseServiceToken)
       .during(2.minute)(
         exec(
-          create,
+          Upload.create,
           pause(2.seconds, 5.seconds),
         )
       )
