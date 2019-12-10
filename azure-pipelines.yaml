@@ -13,7 +13,7 @@ jobs:
   - job: DraftStorePerfTests
     timeoutInMinutes: 0
     pool:
-      name: mgmt-aks-sandbox
+      name: hmcts-cftptl-agent-pool
     workspace:
       clean: all
     steps:
