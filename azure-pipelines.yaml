@@ -33,7 +33,7 @@ jobs:
             ./gradlew --no-daemon --info gatlingRun-uk.gov.hmcts.reform.dmstore.ManageDocumentsAndCleanUp
         env:
           DM_STORE_BASE_URL: http://dm-store-perftest.service.core-compute-perftest.internal
-          S2S_URL_FOR_TESTS: https://rpe-service-auth-provider-perftest.service.core-compute-perftest.internal
+          S2S_URL_FOR_TESTS: http://rpe-service-auth-provider-perftest.service.core-compute-perftest.internal
           USE_S2S_TESTING_SUPPORT: $(s2sTesting)
           S2S_SECRET_FOR_TESTS: $(em-gateway-s2s-token)
           TEST_RAMP_UP_SECS: $(testRampUpSecs)
