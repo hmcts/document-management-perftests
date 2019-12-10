@@ -1,4 +1,4 @@
-package uk.gov.hmcts.reform.draftstore.actions
+package uk.gov.hmcts.reform.dmstore.actions
 
 import io.gatling.core.Predef._
 import io.gatling.core.structure.ChainBuilder

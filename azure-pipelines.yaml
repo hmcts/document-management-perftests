@@ -10,7 +10,7 @@ variables:
   testCleanUpDelaySecs: 1 #3800
 
 jobs:
-  - job: DraftStorePerfTests
+  - job: DmStorePerfTests
     timeoutInMinutes: 0
     pool:
       name: hmcts-cftptl-agent-pool

@@ -1,10 +1,10 @@
-package uk.gov.hmcts.reform.draftstore
+package uk.gov.hmcts.reform.dmstore
 
 import com.typesafe.config.ConfigFactory
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import uk.gov.hmcts.reform.dmstore.actions.setup.LeaseServiceToken.leaseServiceToken
-import uk.gov.hmcts.reform.draftstore.actions.Upload
+import uk.gov.hmcts.reform.dmstore.actions.Upload
 
 import scala.concurrent.duration._
 
@@ -34,7 +34,7 @@ class ManageDocumentsAndCleanUp extends Simulation {
 
 
   val documentsAndCleanUp =
-    scenario("Use draft store and then clean up")
+    scenario("Use document store and then clean up")
         .exec(uploadAndDownloadDocuments)
 
   setUp(
