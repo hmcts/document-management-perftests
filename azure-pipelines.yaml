@@ -1,0 +1,44 @@
+name: dm-store-perf-test
+trigger: none
+pr: none
+variables:
+  DmStoreKeyVaultName: 'dm-perftest'
+  serviceConnection: 'DCD-CFTAPPS-TEST'
+  s2sTesting: false
+  testUsers:  6000
+  testRampUpSecs: 3600
+  testCleanUpDelaySecs: 3800
+
+jobs:
+  - job: DraftStorePerfTests
+    timeoutInMinutes: 0
+    pool:
+      name: mgmt-aks-sandbox
+    workspace:
+      clean: all
+    steps:
+      - task: AzureKeyVault@1
+        displayName: 'Get secrets from dm-store keyvault'
+        inputs:
+          azureSubscription: $(serviceConnection)
+          keyVaultName: $(DmStoreKeyvaultName)
+          secretsFilter: 'em-gateway-s2s-token'
+      - task: Bash@3
+        displayName: 'Execute Gatling Tests'
+        inputs:
+          targetType: inline
+          failOnStderr: false
+          continueOnError: true
+          script: |
+            ./gradlew --no-daemon gatlingRun-uk.gov.hmcts.reform.dmstore.ManageDocumentsAndCleanUp
+        env:
+          DM_STORE_BASE_URL: http://dm-store-perftest.service.core-compute-perftest.internal
+          S2S_URL_FOR_TESTS: https://rpe-service-auth-provider-perftest.service.core-compute-perftest.internal
+          USE_S2S_TESTING_SUPPORT: $(s2sTesting)
+          S2S_SECRET_FOR_TESTS: $(em-gateway-s2s-token)
+          TEST_RAMP_UP_SECS: $(testRampUpSecs)
+          TEST_CLEAN_UP_DELAY_SECS: $(testCleanUpDelaySecs)
+      - task: PublishPipelineArtifact@0
+        inputs:
+          artifactName: 'gatlingReport'
+          targetPath: 'build/reports'

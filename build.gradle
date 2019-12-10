@@ -1,0 +1,24 @@
+plugins {
+  id 'scala'
+  id 'com.github.lkishalmi.gatling' version '3.0.2'
+}
+
+group 'uk.gov.hmcts.reform'
+version '1.0.0'
+
+repositories {
+  jcenter()
+}
+
+
+dependencies {
+  compile 'org.scala-lang:scala-library:2.12.8'
+
+  gatlingCompile 'com.warrenstrange:googleauth:1.1.5'
+  gatlingCompile 'uk.gov.hmcts.reform:document-management-client:6.0.0'
+}
+
+gatling {
+  toolVersion '3.1.1'
+  scalaVersion '2.12.8'
+}
