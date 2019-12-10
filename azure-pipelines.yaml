@@ -5,9 +5,9 @@ variables:
   DmStoreKeyVaultName: 'dm-perftest'
   serviceConnection: 'DCD-CFTAPPS-TEST'
   s2sTesting: false
-  testUsers:  6000
-  testRampUpSecs: 3600
-  testCleanUpDelaySecs: 3800
+  testUsers:  1 #6000
+  testRampUpSecs: 1 #3600
+  testCleanUpDelaySecs: 1 #3800
 
 jobs:
   - job: DraftStorePerfTests
