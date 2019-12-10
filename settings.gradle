@@ -1,10 +1,7 @@
-def mirrorHost = (System.getenv("NONPROD_SUBSCRIPTION_NAME") == "sandbox") ? 'sandbox-artifactory' : 'artifactory'
-def mirrorUrl = "https://${mirrorHost}.platform.hmcts.net/artifactory/maven-remotes"
-
 pluginManagement {
   repositories {
     maven {
-      url mirrorUrl
+      url "https://artifactory.platform.hmcts.net/artifactory/maven-remotes"
     }
     gradlePluginPortal()
   }
