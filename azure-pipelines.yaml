@@ -3,7 +3,7 @@ trigger: none
 pr: none
 variables:
   DmStoreKeyVaultName: 'dm-perftest'
-  serviceConnection: 'DCD-CFTAPPS-TEST'
+  serviceConnection: 'azurerm-qa'
   s2sTesting: false
   testUsers:  1 #6000
   testRampUpSecs: 1 #3600
