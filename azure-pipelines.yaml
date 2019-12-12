@@ -33,7 +33,7 @@ jobs:
           script: |
             ./gradlew --no-daemon --info gatlingRun-uk.gov.hmcts.reform.dmstore.ManageDocumentsAndCleanUp
         env:
-          JAVA_TOOL_OPTIONS: "-Xmx5g -XX:MaxDirectMemorySize=3g"
+          JAVA_TOOL_OPTIONS: "-XX:InitialRAMPercentage=30.0 -XX:MaxRAMPercentage=65.0 -XX:MinRAMPercentage=30.0"
           DM_STORE_BASE_URL: http://dm-store-perftest.service.core-compute-perftest.internal
           S2S_URL_FOR_TESTS: http://rpe-service-auth-provider-perftest.service.core-compute-perftest.internal
           USE_S2S_TESTING_SUPPORT: $(s2sTesting)
