@@ -29,7 +29,7 @@ class ManageDocumentsAndCleanUp extends Simulation {
         Upload.upload,
         pause(2.seconds, 5.seconds),
       )
-      .repeat(7, "n")(
+      .repeat(8, "n")(
         exec(
           Download.download,
           pause(2.seconds, 5.seconds),
