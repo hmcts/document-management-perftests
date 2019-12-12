@@ -36,6 +36,7 @@ jobs:
           S2S_URL_FOR_TESTS: http://rpe-service-auth-provider-perftest.service.core-compute-perftest.internal
           USE_S2S_TESTING_SUPPORT: $(s2sTesting)
           S2S_SECRET_FOR_TESTS: $(em-gateway-s2s-token)
+          TEST_USERS: $(testUsers)
           TEST_RAMP_UP_SECS: $(testRampUpSecs)
           TEST_CLEAN_UP_DELAY_SECS: $(testCleanUpDelaySecs)
       - task: PublishPipelineArtifact@0
