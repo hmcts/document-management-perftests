@@ -5,8 +5,8 @@ variables:
   DmStoreKeyVaultName: 'dm-perftest'
   serviceConnection: 'azurerm-qa'
   s2sTesting: false
-  testUsers:  300 #6000
-  testRampUpSecs: 1200 #3600
+  testUsers:  6000
+  testRampUpSecs: 3600
   testCleanUpDelaySecs: 1 #3800
 
 jobs:

@@ -8,7 +8,10 @@ object Document {
   val documentsPath = "documents/"
 
   val documents = List(
-    "1MB.pdf", "1MB-b.pdf", "1MB-c.pdf"
+    "100MB.pdf", "1MB-b.pdf",	"2MB-d.pdf", "2MB-h.pdf",	"50MB.pdf", "Dummy.txt",
+    "1MB-c.pdf", "240KB.txt", "2MB-e.pdf",	"2MB-i.pdf", "Dummy2.txt",
+    "1MB.pdf", "2MB-b.pdf", "2MB-f.pdf", "2MB-j.pdf",	"5MB.pdf", "Dummy3.txt",
+    "10MB.pdf", "20MB.pdf", "2MB-c.pdf", "2MB-g.pdf", "2MB.pdf", "90MB.pdf"
   )
 
   val documentsFeeder = Iterator.continually(Map("document_file" -> documents(Random.nextInt(documents.length))))
