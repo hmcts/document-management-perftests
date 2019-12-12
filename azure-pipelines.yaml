@@ -6,6 +6,7 @@ variables:
   serviceConnection: 'azurerm-qa'
   s2sTesting: false
   testUsers:  6000
+  testBinaryToMetadataRatio: 7
   testRampUpSecs: 3600
   testCleanUpDelaySecs: 1 #3800
 
@@ -37,6 +38,7 @@ jobs:
           USE_S2S_TESTING_SUPPORT: $(s2sTesting)
           S2S_SECRET_FOR_TESTS: $(em-gateway-s2s-token)
           TEST_USERS: $(testUsers)
+          TEST_BIN_TO_META_RATIO: $(testBinaryToMetadataRatio)
           TEST_RAMP_UP_SECS: $(testRampUpSecs)
           TEST_CLEAN_UP_DELAY_SECS: $(testCleanUpDelaySecs)
       - task: PublishPipelineArtifact@0

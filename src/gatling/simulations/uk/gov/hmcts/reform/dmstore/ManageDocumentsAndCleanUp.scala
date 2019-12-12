@@ -4,7 +4,7 @@ import com.typesafe.config.ConfigFactory
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import uk.gov.hmcts.reform.dmstore.actions.setup.LeaseServiceToken.leaseServiceToken
-import uk.gov.hmcts.reform.dmstore.actions.{Download, Upload}
+import uk.gov.hmcts.reform.dmstore.actions.{Download, Update, Upload}
 
 import scala.concurrent.duration._
 
@@ -14,6 +14,7 @@ class ManageDocumentsAndCleanUp extends Simulation {
 
   private val testUsers = config.getInt("params.testUsers")
   private val testRampUpSecs = config.getInt("params.testRampUpSecs")
+  private val testBinaryToMetadataRatio = config.getInt("params.testBinaryToMetadataRatio")
   private val testCleanUpDelaySecs = config.getInt("params.testCleanUpDelaySecs")
 
 
@@ -29,7 +30,7 @@ class ManageDocumentsAndCleanUp extends Simulation {
         Upload.upload,
         pause(2.seconds, 5.seconds),
       )
-      .repeat(8, "n")(
+      .repeat(testBinaryToMetadataRatio, "n")(
         exec(
           Download.download,
           pause(2.seconds, 5.seconds),
