@@ -7,7 +7,7 @@ import uk.gov.hmcts.reform.dmstore.actions.setup.Document
 
 object Upload {
 
-  val create: ChainBuilder =
+  val upload: ChainBuilder =
     feed(Document.documentsFeeder)
       .exec(
         http("Upload document")
@@ -17,10 +17,15 @@ object Upload {
             "user-id" -> "auto.test.cnp@gmail.com",
           ))
           .bodyPart(
-            RawFileBodyPart("files", "${document_file}")
+            RawFileBodyPart("files", Document.documentsPath.concat("${document_file}"))
               .contentType("application/pdf")
-              .fileName(Document.filename("${document_file}"))).asMultipartForm
+              .fileName("${document_file}")).asMultipartForm
           .formParam("classification", "PUBLIC")
-          .check(status is 200, jsonPath("$._embedded.documents[0]._links.binary.href").saveAs("fileId")))
-
+          .check(status is 200, jsonPath("$._embedded.documents[0]._links.self.href").saveAs("fileUrl")))
+      .exec(session => {
+          val fileUrl = session("fileUrl").as[String]
+          val fileId = fileUrl.substring(fileUrl.lastIndexOf('/') + 1)
+          Document.uploadedDocuments += fileId
+          println(Document.uploadedDocuments)
+          session })
 }

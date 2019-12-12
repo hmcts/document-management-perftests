@@ -4,7 +4,7 @@ import com.typesafe.config.ConfigFactory
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import uk.gov.hmcts.reform.dmstore.actions.setup.LeaseServiceToken.leaseServiceToken
-import uk.gov.hmcts.reform.dmstore.actions.Upload
+import uk.gov.hmcts.reform.dmstore.actions.{Download, Upload}
 
 import scala.concurrent.duration._
 
@@ -25,9 +25,13 @@ class ManageDocumentsAndCleanUp extends Simulation {
   val uploadAndDownloadDocuments =
     scenario("Upload documents")
       .exec(leaseServiceToken)
-      .during(2.minute)(
+      .exec(
+        Upload.upload,
+        pause(2.seconds, 5.seconds),
+      )
+      .repeat(7, "n")(
         exec(
-          Upload.create,
+          Download.download,
           pause(2.seconds, 5.seconds),
         )
       )
@@ -38,7 +42,7 @@ class ManageDocumentsAndCleanUp extends Simulation {
         .exec(uploadAndDownloadDocuments)
 
   setUp(
-    // Load test over 1 hour - settings
+    // Load test over x hours - settings
     documentsAndCleanUp.inject(rampUsers(testUsers).during(testRampUpSecs.seconds))
   ).protocols(httpProtocol)
 
