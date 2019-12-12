@@ -14,11 +14,21 @@ object Document {
     "10MB.pdf", "20MB.pdf", "2MB-c.pdf", "2MB-g.pdf", "2MB.pdf", "90MB.pdf"
   )
 
+  val extToContentType = Map(
+    "pdf" -> "application/pdf",
+    "txt" -> "text/plain",
+  )
+
   val documentsFeeder = Iterator.continually(Map("document_file" -> documents(Random.nextInt(documents.length))))
 
 
   var uploadedDocuments = new ListBuffer[String]()
 
   val uploadedDocumentsFeeder = Iterator.continually(Map("document_id" -> uploadedDocuments(Random.nextInt(uploadedDocuments.length))))
+
+
+  def contentType(fileName: String): String = {
+    extToContentType(fileName.substring(fileName.length - 3))
+  }
 
 }

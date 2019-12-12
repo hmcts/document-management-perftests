@@ -18,7 +18,7 @@ object Upload {
           ))
           .bodyPart(
             RawFileBodyPart("files", Document.documentsPath.concat("${document_file}"))
-              .contentType("application/pdf")
+              .contentType(session => session("document_file").validate[String].map(s => Document.contentType(s)))
               .fileName("${document_file}")).asMultipartForm
           .formParam("classification", "PUBLIC")
           .check(status is 200, jsonPath("$._embedded.documents[0]._links.self.href").saveAs("fileUrl")))
