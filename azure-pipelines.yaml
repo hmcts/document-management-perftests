@@ -5,15 +5,15 @@ variables:
   DmStoreKeyVaultName: 'dm-perftest'
   serviceConnection: 'azurerm-qa'
   s2sTesting: false
-  testUsers:  750
+  testUsers:  125
   testBinaryToMetadataRatio: 7
-  testRampUpSecs: 3600
+  testRampUpSecs: 900
   testCleanUpDelaySecs: 1 #3800
 
 jobs:
   - job: DmStorePerfTests
     strategy:
-      parallel: 4
+      parallel: 2
     timeoutInMinutes: 0
     pool:
       name: hmcts-cftptl-agent-pool
