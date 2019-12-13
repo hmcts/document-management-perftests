@@ -5,7 +5,7 @@ variables:
   DmStoreKeyVaultName: 'dm-perftest'
   serviceConnection: 'azurerm-qa'
   s2sTesting: false
-  testUsers:  500
+  testUsers:  750
   testBinaryToMetadataRatio: 7
   testRampUpSecs: 3600
   testCleanUpDelaySecs: 1 #3800
