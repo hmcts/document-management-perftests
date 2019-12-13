@@ -46,5 +46,5 @@ jobs:
           TEST_CLEAN_UP_DELAY_SECS: $(testCleanUpDelaySecs)
       - task: PublishPipelineArtifact@0
         inputs:
-          artifactName: 'gatlingReport'
-          targetPath: 'build/reports'
+          artifactName: "gatlingReport-$(System.JobPositionInPhase)"
+          targetPath: "build/reports"
