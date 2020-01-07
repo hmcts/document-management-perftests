@@ -13,7 +13,7 @@ variables:
 jobs:
   - job: DmStorePerfTests
     strategy:
-      parallel: 4
+      parallel: 1
     timeoutInMinutes: 0
     pool:
       name: hmcts-cftptl-agent-pool
