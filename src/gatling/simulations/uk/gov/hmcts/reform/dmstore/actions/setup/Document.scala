@@ -29,7 +29,7 @@ object Document {
 
 
   val largeDocuments = List(
-    "460mbaudio.mp3.pdf"
+    "460mbaudio.mp3"
   )
 
   val largeDocumentsFeeder = Iterator.continually(Map("document_file" -> largeDocuments(Random.nextInt(largeDocuments.length))))
