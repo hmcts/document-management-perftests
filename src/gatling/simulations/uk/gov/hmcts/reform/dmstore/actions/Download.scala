@@ -11,16 +11,16 @@ object Download {
   val config = ConfigFactory.load()
 
   private val testBinaryToMetadataRatio = config.getInt("params.testBinaryToMetadataRatio")
-  private val binaryPossibility = 100.0 / (testBinaryToMetadataRatio + 1) * testBinaryToMetadataRatio
-  private val metadataPossibility = 100.00 - binaryPossibility
+  private val binaryProbability = 100.0 / (testBinaryToMetadataRatio + 1) * testBinaryToMetadataRatio
+  private val metadataProbability = 100.00 - binaryProbability
 
 
   val download: ChainBuilder =
     feed(Document.uploadedDocumentsFeeder)
       .randomSwitch(  // At the moment, this is roughly 7 times binary file and once metadata out of 8 runs
-        binaryPossibility -> exec(session => {
+        binaryProbability -> exec(session => {
           session.set("download_path", "/binary").set("download_type", "binary")}),
-        metadataPossibility -> exec(session => {
+        metadataProbability -> exec(session => {
           session.set("download_path", "").set("download_type", "metadata")})
       )
       .exec(
