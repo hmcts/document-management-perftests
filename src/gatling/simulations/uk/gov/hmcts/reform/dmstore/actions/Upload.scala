@@ -17,11 +17,13 @@ object Upload {
 
   val upload: ChainBuilder =
     randomSwitch(
-      standardProbability -> feed(Document.documentsFeeder),
-      largeProbability -> feed(Document.largeDocumentsFeeder),
+      standardProbability -> feed(Document.documentsFeeder).exec(session => {
+        session.set("upload_type", "standard").set("feeder", Document.documentsFeeder)}),
+      largeProbability -> feed(Document.largeDocumentsFeeder).exec(session => {
+        session.set("upload_type", "large").set("feeder", Document.largeDocumentsFeeder)})
     )
     .exec(
-      http("Upload document")
+      http("Upload document ${upload_type}")
         .post(url = "/documents")
         .headers(Map(
           "ServiceAuthorization" -> "Bearer ${service_token}",
